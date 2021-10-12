@@ -14,11 +14,11 @@ from src.VSH import (
 from src import extra_special
 
 
-def E_VSH(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out):
+def E_VSH(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric):
     superscript = np.where(r <= a, 1, 3)
 
-    eps_in = eps_in_func(omega, particle_type)
-    mu_in = mu_in_func(omega, particle_type)
+    eps_in = eps_in_func(omega, particle_type, eps_dielectric)
+    mu_in = mu_in_func(omega, particle_type, mu_dielectric)
     n_in = np.sqrt(eps_in * mu_in)
     n_out = np.sqrt(eps_out * mu_out)
     k0 = omega / const.speed_of_light
@@ -57,11 +57,11 @@ def E_VSH(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_o
         return(0)
 
 
-def H_VSH(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out):
+def H_VSH(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric):
     superscript = np.where(r <= a, 1, 3)
 
-    eps_in = eps_in_func(omega, particle_type)
-    mu_in = mu_in_func(omega, particle_type)
+    eps_in = eps_in_func(omega, particle_type, eps_dielectric)
+    mu_in = mu_in_func(omega, particle_type, mu_dielectric)
     n_in = np.sqrt(eps_in * mu_in)
     n_out = np.sqrt(eps_out * mu_out)
     k0 = omega / const.speed_of_light
@@ -104,11 +104,11 @@ def H_VSH(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_o
         return(0)
 
 
-def E_VSH_complex(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out):
+def E_VSH_complex(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric):
     superscript = np.where(r <= a, 1, 3)
 
-    eps_in = eps_in_func(omega, particle_type)
-    mu_in = mu_in_func(omega, particle_type)
+    eps_in = eps_in_func(omega, particle_type, eps_dielectric)
+    mu_in = mu_in_func(omega, particle_type, mu_dielectric)
     n_in = np.sqrt(eps_in * mu_in)
     n_out = np.sqrt(eps_out * mu_out)
     k0 = omega / const.speed_of_light
