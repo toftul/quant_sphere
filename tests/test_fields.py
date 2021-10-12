@@ -8,5 +8,6 @@ class TestVSH(unittest.TestCase):
 
     plt.plot()
     plt.show()
+
     def test_continuality(self):
         self.assertEqual(1, 1)
