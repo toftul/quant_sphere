@@ -2,6 +2,7 @@ import numpy as np
 from src.dispersion import *
 from src.fields import *
 
+
 def S_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, part="both"):
     factor_el = 1
     factor_mag = 1
