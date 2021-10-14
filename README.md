@@ -31,3 +31,4 @@ n (n + 1) \frac{z_n(r)}{r} Y^m_n(\theta, \varphi) \\
 \frac{i m }{\sin \theta} \frac{z_n}{r} Y^m_n(\theta, \varphi)
 \end{bmatrix}
 ```
+
