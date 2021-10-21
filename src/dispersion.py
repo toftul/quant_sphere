@@ -7,10 +7,10 @@ from src import extra_special
 """
 In compact form we can write them as
 \begin{equation}
-	\text{dispersion eq. for TE:} \qquad \frac{\mu_\text{in}}{\mu_\text{out}} \left( 1 + n_{\text{out}} z \frac{h_n^{(1)\prime} (n_{\text{out}} z)}{h_n^{(1)} (n_{\text{out}} z)}  \right) = 1 + n_\text{in} z \frac{j_n^\prime(n_\text{in} z)}{j_n (n_\text{in} z)}
+    \text{dispersion eq. for TE:} \qquad \frac{\mu_\text{in}}{\mu_\text{out}} \left( 1 + n_{\text{out}} z \frac{h_n^{(1)\prime} (n_{\text{out}} z)}{h_n^{(1)} (n_{\text{out}} z)}  \right) = 1 + n_\text{in} z \frac{j_n^\prime(n_\text{in} z)}{j_n (n_\text{in} z)}
 \end{equation}
 \begin{equation}
-	\text{dispersion eq. for TM:} \qquad \frac{\varepsilon_\text{in}}{\varepsilon_\text{out}} \left( 1 + n_{\text{out}} z \frac{h_n^{(1)\prime} (n_{\text{out}} z)}{h_n^{(1)} (n_{\text{out}} z)}  \right) = 1 + n_\text{in} z \frac{j_n^\prime(n_\text{in} z)}{j_n (n_\text{in} z)}
+    \text{dispersion eq. for TM:} \qquad \frac{\varepsilon_\text{in}}{\varepsilon_\text{out}} \left( 1 + n_{\text{out}} z \frac{h_n^{(1)\prime} (n_{\text{out}} z)}{h_n^{(1)} (n_{\text{out}} z)}  \right) = 1 + n_\text{in} z \frac{j_n^\prime(n_\text{in} z)}{j_n (n_\text{in} z)}
 \end{equation}
 Here $z=k_0 a = \frac{\omega}{c} a \in \mathbb{Z}$ is the dimensionless **frequency**, and $n_{\text{in}} = \sqrt{\varepsilon_{\text{in}} \mu_{\text{in}}}$, $n_{\text{out}} = \sqrt{\varepsilon_{\text{out}} \mu_{\text{out}}}$. Prime shows the derivative with respect to the argument.
 
@@ -47,7 +47,7 @@ def eps_in_func(omega, particle_type, eps_dielectric):
         eps_inf = 1
         # for Gold from Novotny p. 380
         omega_p = 13.8e15  # [1/s]
-        Gamma = 1.075e14  # [1/s]
+        Gamma = 0.0  # 1.075e14  # [1/s]
         return eps_inf - omega_p**2 / (omega**2 + 1j * Gamma*omega)
     elif particle_type == "dielectric":
         return eps_dielectric
@@ -75,8 +75,10 @@ def fTE(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric
 
     kappa = mu_in/mu_out
 
-    return z * (kappa * n_out * jn * hnp - n_in*jnp*hn) + hn*jn*(kappa - 1)
+    f = z * (kappa * n_out * jn * hnp - n_in*jnp*hn) + hn*jn*(kappa - 1)
+    weight = z  # to aviod singularity at z = 0
 
+    return weight * f
 
 def fTEp(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric):
     """
@@ -104,7 +106,12 @@ def fTEp(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectri
     term3 = z*(jnp*hnp*n_out*n_in*(kappa - 1) + kappa
                * n_out**2 * jn*hnpp - n_in**2 * jnpp*hn)
 
-    return term1 + term2 + term3
+    f = z * (kappa * n_out * jn * hnp - n_in*jnp*hn) + hn*jn*(kappa - 1)
+    df = term1 + term2 + term3
+    weight = z  # to aviod singularity at z = 0
+    dweight = 1.0
+
+    return weight * df + dweight * f
 
 
 def fTM(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric):
@@ -122,7 +129,10 @@ def fTM(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric
 
     kappa = eps_in/eps_out
 
-    return z * (kappa * n_out * jn * hnp - n_in*jnp*hn) + hn*jn*(kappa - 1)
+    weight = z  # to aviod singularity at z = 0
+    f = z * (kappa * n_out * jn * hnp - n_in*jnp*hn) + hn*jn*(kappa - 1)
+
+    return weight * f
 
 
 def fTMp(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric):
@@ -151,4 +161,10 @@ def fTMp(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectri
     term3 = z*(jnp*hnp*n_out*n_in*(kappa - 1) + kappa
                * n_out**2 * jn*hnpp - n_in**2 * jnpp*hn)
 
-    return term1 + term2 + term3
+    f = z * (kappa * n_out * jn * hnp - n_in*jnp*hn) + hn*jn*(kappa - 1)
+    df = term1 + term2 + term3
+
+    weight = z  # to aviod singularity at z = 0
+    dweight = 1.0
+
+    return weight * df + dweight * f
