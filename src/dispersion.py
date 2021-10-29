@@ -60,7 +60,7 @@ def mu_in_func(omega, particle_type, mu_dielectric=1):
     return mu_dielectric
 
 
-def fTE(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric):
+def fTE(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric, weightOrder=0):
     z = k0a
     omega = k0a/a * const.speed_of_light
     eps_in = eps_in_func(omega, particle_type, eps_dielectric)
@@ -76,11 +76,12 @@ def fTE(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric
     kappa = mu_in/mu_out
 
     f = z * (kappa * n_out * jn * hnp - n_in*jnp*hn) + hn*jn*(kappa - 1)
-    weight = z  # to aviod singularity at z = 0
+    weight = z**weightOrder  # to aviod singularity at z = 0
 
     return weight * f
 
-def fTEp(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric):
+
+def fTEp(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric, weightOrder=0):
     """
         WORKS ONLY FOR NON-DISPERSIVE CASE
     """
@@ -101,6 +102,10 @@ def fTEp(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectri
 
     kappa = mu_in/mu_out
 
+    # for Gold from Novotny p. 380
+    # omega_p = 13.8e15  # [1/s]
+    # dn_in = np.sqrt(mu_in / eps_in) * (a/const.speed_of_light)**2  * omega_p**2 / z**3
+
     term1 = jn*hnp*n_out * (2*kappa - 1)
     term2 = jnp*hn*n_in * (kappa - 2)
     term3 = z*(jnp*hnp*n_out*n_in*(kappa - 1) + kappa
@@ -108,13 +113,15 @@ def fTEp(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectri
 
     f = z * (kappa * n_out * jn * hnp - n_in*jnp*hn) + hn*jn*(kappa - 1)
     df = term1 + term2 + term3
-    weight = z  # to aviod singularity at z = 0
-    dweight = 1.0
+    weight = z**weightOrder  # to aviod singularity at z = 0
+    dweight = 0
+    if weightOrder != 0:
+        dweight = weightOrder * z**(weightOrder-1)
 
     return weight * df + dweight * f
 
 
-def fTM(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric):
+def fTM(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric, weightOrder=0):
     z = k0a
     omega = k0a/a * const.speed_of_light
     eps_in = eps_in_func(omega, particle_type, eps_dielectric)
@@ -129,13 +136,13 @@ def fTM(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric
 
     kappa = eps_in/eps_out
 
-    weight = z  # to aviod singularity at z = 0
+    weight = z**weightOrder  # to aviod singularity at z = 0
     f = z * (kappa * n_out * jn * hnp - n_in*jnp*hn) + hn*jn*(kappa - 1)
 
     return weight * f
 
 
-def fTMp(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric):
+def fTMp(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectric, weightOrder=0):
     """
         WORKS ONLY FOR NON-DISPERSIVE CASE
     """
@@ -164,7 +171,9 @@ def fTMp(n, k0a, a, eps_out, mu_out, particle_type, eps_dielectric, mu_dielectri
     f = z * (kappa * n_out * jn * hnp - n_in*jnp*hn) + hn*jn*(kappa - 1)
     df = term1 + term2 + term3
 
-    weight = z  # to aviod singularity at z = 0
-    dweight = 1.0
+    weight = z**weightOrder  # to aviod singularity at z = 0
+    dweight = 0
+    if weightOrder != 0:
+        dweight = weightOrder * z**(weightOrder-1)
 
     return weight * df + dweight * f
