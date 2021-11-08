@@ -660,22 +660,15 @@ def J2_canonical_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu
 
     E_rxnabla2_E = 0
     for jj in range(3):
-        E_rxnabla2_E += r2 * np.conj(E[jj]) * (Dxx(lambda x, y, z: EE(x, y, z)[jj], x, y, z) +
-                                               Dyy(lambda x, y, z: EE(
-                                                   x, y, z)[jj], x, y, z)
-                                               + Dzz(lambda x, y, z: EE(x, y, z)[jj], x, y, z)) - (
-            np.conj(E[jj]) * (x**2 * Dxx(lambda x, y, z: EE(x, y, z)[jj], x, y, z) +
-                              y**2 * Dyy(lambda x, y, z: EE(x, y, z)
-                                         [jj], x, y, z)
-                              + z**2 * Dzz(lambda x, y,
-                                           z: EE(x, y, z)[jj], x, y, z)
-                              + 2*x*y * Dxy(lambda x, y,
-                                            z: EE(x, y, z)[jj], x, y, z)
-                              + 2*x*z * Dxz(lambda x, y,
-                                            z: EE(x, y, z)[jj], x, y, z)
-                              + 2*y*z * Dyz(lambda x, y,
-                                            z: EE(x, y, z)[jj], x, y, z)
-                              )
+        E_rxnabla2_E += r2 * np.conj(E[jj]) * (Dxx(lambda x,y,z: EE(x, y, z)[jj], x, y, z) +
+                                               Dyy(lambda x,y,z: EE(x, y, z)[jj], x, y, z) +
+                                               Dzz(lambda x,y,z: EE(x, y, z)[jj], x, y, z)) - (
+            np.conj(E[jj]) * (   x**2 * Dxx(lambda x,y,z: EE(x, y, z)[jj], x, y, z)
+                              +  y**2 * Dyy(lambda x,y,z: EE(x, y, z)[jj], x, y, z)
+                              +  z**2 * Dzz(lambda x,y,z: EE(x, y, z)[jj], x, y, z)
+                              + 2*x*y * Dxy(lambda x,y,z: EE(x, y, z)[jj], x, y, z)
+                              + 2*x*z * Dxz(lambda x,y,z: EE(x, y, z)[jj], x, y, z)
+                              + 2*y*z * Dyz(lambda x,y,z: EE(x, y, z)[jj], x, y, z))
         )
 
     def r_dot_H(x, y, z):
