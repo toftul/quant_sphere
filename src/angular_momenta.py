@@ -680,21 +680,15 @@ def J2_canonical_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu
 
     H_rxnabla2_H = 0
     for jj in range(3):
-        H_rxnabla2_H += r2 * np.conj(H[jj]) * (Dxx(lambda x, y, z: HH(x, y, z)[jj], x, y, z) +
-                                               Dyy(lambda x, y, z: HH(
-                                                   x, y, z)[jj], x, y, z)
+        H_rxnabla2_H += r2 * np.conj(H[jj]) * (Dxx(lambda x, y, z: HH(x, y, z)[jj], x, y, z)
+                                               + Dyy(lambda x, y, z: HH(x, y, z)[jj], x, y, z)
                                                + Dzz(lambda x, y, z: HH(x, y, z)[jj], x, y, z)) - (
-            np.conj(H[jj]) * (x**2 * Dxx(lambda x, y, z: HH(x, y, z)[jj], x, y, z) +
-                              y**2 * Dyy(lambda x, y, z: HH(x, y, z)
-                                         [jj], x, y, z)
-                              + z**2 * Dzz(lambda x, y,
-                                           z: HH(x, y, z)[jj], x, y, z)
-                              + 2*x*y * Dxy(lambda x, y,
-                                            z: HH(x, y, z)[jj], x, y, z)
-                              + 2*x*z * Dxz(lambda x, y,
-                                            z: HH(x, y, z)[jj], x, y, z)
-                              + 2*y*z * Dyz(lambda x, y,
-                                            z: HH(x, y, z)[jj], x, y, z)
+            np.conj(H[jj]) * (   x**2 * Dxx(lambda x, y, z: HH(x, y, z)[jj], x, y, z)
+                              +  y**2 * Dyy(lambda x, y, z: HH(x, y, z)[jj], x, y, z)
+                              +  z**2 * Dzz(lambda x, y, z: HH(x, y, z)[jj], x, y, z)
+                              + 2*x*y * Dxy(lambda x, y, z: HH(x, y, z)[jj], x, y, z)
+                              + 2*x*z * Dxz(lambda x, y, z: HH(x, y, z)[jj], x, y, z)
+                              + 2*y*z * Dyz(lambda x, y, z: HH(x, y, z)[jj], x, y, z)
                               )
         )
 
