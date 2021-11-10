@@ -40,7 +40,8 @@ def S_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out,
     ExE = np.cross(np.conj(E), E, axis=0)
     HxH = np.cross(np.conj(H), H, axis=0)
 
-    return 1/(4*np.real(omega)) * np.imag(factor_el * eps_in_out * const.epsilon_0 * ExE + factor_mag * mu_in_out * const.mu_0 * HxH)
+
+    return 1/(4*np.abs(omega)) * np.imag(factor_el * eps_in_out * const.epsilon_0 * ExE + factor_mag * mu_in_out * const.mu_0 * HxH)
 
 
 def L_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
@@ -150,7 +151,7 @@ def L_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out,
         )
     ])
 
-    linear_momentum = 1/(4*np.real(omega)) * np.imag(
+    linear_momentum = 1/(4*np.abs(omega)) * np.imag(
         factor_el * eps_in_out * const.epsilon_0 * EnablaE
         + factor_mag * mu_in_out * const.mu_0 * HnablaH
     )
@@ -226,7 +227,7 @@ def j_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out,
     W = W_(m, n, r, theta, phi, mode_type, a, omega,
            particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
 
-    return np.real(omega)*J/W
+    return np.abs(omega)*J/W
 
 
 def s_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
@@ -235,7 +236,7 @@ def s_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out,
     W = W_(m, n, r, theta, phi, mode_type, a, omega,
            particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
 
-    return np.real(omega)*S/W
+    return np.abs(omega)*S/W
 
 
 def l_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
@@ -244,7 +245,7 @@ def l_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out,
     W = W_(m, n, r, theta, phi, mode_type, a, omega,
            particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
 
-    return np.real(omega)*L/W
+    return np.abs(omega)*L/W
 
 
 def Jz_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
@@ -259,7 +260,7 @@ def jz_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out
     W = W_(m, n, r, theta, phi, mode_type, a, omega,
            particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
 
-    return np.real(omega)*(J[0] * np.cos(theta) - J[1] * np.sin(theta))/W
+    return np.abs(omega)*(J[0] * np.cos(theta) - J[1] * np.sin(theta))/W
 
 
 def j2_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
@@ -281,7 +282,7 @@ def sz_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out
     W = W_(m, n, r, theta, phi, mode_type, a, omega,
            particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
 
-    return np.real(omega)*(S[0] * np.cos(theta) - S[1] * np.sin(theta))/W
+    return np.abs(omega)*(S[0] * np.cos(theta) - S[1] * np.sin(theta))/W
 
 
 def lz_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
@@ -290,7 +291,7 @@ def lz_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out
     W = W_(m, n, r, theta, phi, mode_type, a, omega,
            particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
 
-    return np.real(omega)*(L[0] * np.cos(theta) - L[1] * np.sin(theta))/W
+    return np.abs(omega)*(L[0] * np.cos(theta) - L[1] * np.sin(theta))/W
 
 
 def PyontingVector_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric):
@@ -345,7 +346,7 @@ def jz_kinetic_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out
     W = W_(m, n, r, theta, phi, mode_type, a,
            omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric)
 
-    return np.real(omega)*(J[0] * np.cos(theta) - J[1] * np.sin(theta))/W
+    return np.abs(omega)*(J[0] * np.cos(theta) - J[1] * np.sin(theta))/W
 
 
 def j2_kinetic_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric):
@@ -354,11 +355,12 @@ def j2_kinetic_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out
     W = W_(m, n, r, theta, phi, mode_type, a,
            omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric)
 
-    j1 = np.real(omega)*J[0]/W
-    j2 = np.real(omega)*J[1]/W
-    j3 = np.real(omega)*J[2]/W
+    j1 = np.abs(omega)*J[0]/W
+    j2 = np.abs(omega)*J[1]/W
+    j3 = np.abs(omega)*J[2]/W
 
     return np.real(np.conj(j1)*j1 + np.conj(j2)*j2 + np.conj(j3)*j3)
+
 
 
 def S_cart_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
@@ -398,7 +400,7 @@ def S_cart_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, 
     ExE = np.cross(np.conj(E), E, axis=0)
     HxH = np.cross(np.conj(H), H, axis=0)
 
-    return 1/(4*np.real(omega)) * np.imag(factor_el * eps_in_out * const.epsilon_0 * ExE + factor_mag * mu_in_out * const.mu_0 * HxH)
+    return 1/(4*np.abs(omega)) * np.imag(factor_el * eps_in_out * const.epsilon_0 * ExE + factor_mag * mu_in_out * const.mu_0 * HxH)
 
 
 def L_cart_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
@@ -500,7 +502,7 @@ def L_cart_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, 
         * dH_dz[1] + np.conj(H[2]) * dH_dz[2]
     ])
 
-    linear_momentum = 1/(4*np.real(omega)) * np.imag(
+    linear_momentum = 1/(4*np.abs(omega)) * np.imag(
         factor_el * eps_in_out * const.epsilon_0 * EnablaE
         + factor_mag * mu_in_out * const.mu_0 * HnablaH
     )
@@ -530,7 +532,7 @@ def s_cart_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, 
     W = W_(m, n, r, theta, phi, mode_type, a, omega,
            particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
 
-    return np.real(omega)*S/W
+    return np.abs(omega)*S/W
 
 
 def l_cart_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
@@ -543,7 +545,7 @@ def l_cart_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, 
     W = W_(m, n, r, theta, phi, mode_type, a, omega,
            particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
 
-    return np.real(omega)*L/W
+    return np.abs(omega)*L/W
 
 
 def j_cart_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
@@ -692,7 +694,7 @@ def J2_canonical_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu
                               )
         )
 
-    return 1/(4*omega) * (const.epsilon_0*eps_in_out * factor_el * (Enabla_rE - E_rxnabla2_E) + const.mu_0*mu_in_out * factor_mag * (Hnabla_rH - H_rxnabla2_H))
+    return 1/(4*np.abs(omega)) * (const.epsilon_0*eps_in_out * factor_el * (Enabla_rE - E_rxnabla2_E) + const.mu_0*mu_in_out * factor_mag * (Hnabla_rH - H_rxnabla2_H))
 
 
 def J2_canonical2_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both", epsh=1e-2):
@@ -834,4 +836,4 @@ def J2_canonical2_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, m
         * dy_H + np.conjugate(H[2])*dz_H
     )
 
-    return 1/(4*omega) * (const.epsilon_0*eps_in_out * factor_el * ELECTRIC_PART + const.mu_0*mu_in_out * factor_mag * MAGNETIC_PART)
+    return 1/(4*np.abs(omega)) * (const.epsilon_0*eps_in_out * factor_el * ELECTRIC_PART + const.mu_0*mu_in_out * factor_mag * MAGNETIC_PART)
