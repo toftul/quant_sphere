@@ -1,7 +1,7 @@
 import numpy as np
 from src.dispersion import *
 from src.fields import *
-
+# from icecream import ic
 
 def S_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
     factor_el = 1
