@@ -86,11 +86,11 @@ def D(foo, x, y, z, variables='nan', dh=1e-5, order=3):
     """
     def d3(foo, x, y, z, var='nan', n=1):
         dd = np.nan
-        if var == 'x':
+        if var == 'x' or var == 0:
             dd = derivative(lambda x: foo(x, y, z), x, dx=dh, order=order, n=n)
-        elif var == 'y':
+        elif var == 'y' or var == 1:
             dd = derivative(lambda y: foo(x, y, z), y, dx=dh, order=order, n=n)
-        elif var == 'z':
+        elif var == 'z' or var == 2:
             dd = derivative(lambda z: foo(x, y, z), z, dx=dh, order=order, n=n)
         return dd
 
