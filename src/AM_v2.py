@@ -2,6 +2,16 @@ import numpy as np
 from src.misc import D
 
 
+def whichPart(part="both"):
+    factor_el = 1
+    factor_mag = 1
+    if part == "electric":
+        factor_mag = 0
+    if part == "magnetic":
+        factor_el = 0
+    return factor_el, factor_mag
+
+
 def s_canonical(r, theta, phi, fE, fH, part="both"):
     """
         Electric and magnetic field functions are expected to be
@@ -9,12 +19,7 @@ def s_canonical(r, theta, phi, fE, fH, part="both"):
             fH = fH(r, theta, phi)
         In the spherical coord basis (e_r, e_theta, e_phi)
     """
-    factor_el = 1
-    factor_mag = 1
-    if part == "electric":
-        factor_mag = 0
-    if part == "magnetic":
-        factor_el = 0
+    factor_el, factor_mag = whichPart(part)
 
     E, H = fE(r, theta, phi), fH(r, theta, phi)
     ExE = np.cross(np.conj(E), E, axis=0)
@@ -32,12 +37,7 @@ def j2_canonical(x, y, z, fE, fH, part="both", dh=1e-5):
             fH = fH(x, y, z)
         In cartesian coord basis (e_x, e_y, e_z)
     """
-    factor_el = 1
-    factor_mag = 1
-    if part == "electric":
-        factor_mag = 0
-    if part == "magnetic":
-        factor_el = 0
+    factor_el, factor_mag = whichPart(part)
 
     E, H = fE(x, y, z), fH(x, y, z)
     dx_E, dx_H = D(fE, x, y, z, 'x'), D(fH, x, y, z, 'x')
