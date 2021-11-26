@@ -30,6 +30,13 @@ def s_canonical(r, theta, phi, fE, fH, part="both"):
     return (factor_el*ExE + factor_mag*HxH)/w
 
 
+def w_canonical(x, y, z, fE, fH, part="both", dh=1e-5):
+    factor_el, factor_mag = whichPart(part)
+
+    E, H = fE(x, y, z), fH(x, y, z)
+    w = factor_el*np.linalg.norm(E)**2 + factor_mag*np.linalg.norm(H)**2
+    return w
+
 def j2_canonical(x, y, z, fE, fH, part="both", dh=1e-5):
     """
         Electric and magnetic field functions are expected to be
@@ -81,6 +88,7 @@ def j2_canonical(x, y, z, fE, fH, part="both", dh=1e-5):
     )
 
     w = factor_el*np.linalg.norm(E)**2 + factor_mag*np.linalg.norm(H)**2
+    w = 1
 
     return (factor_el * ELECTRIC_PART + factor_mag * MAGNETIC_PART) / w
 
