@@ -66,6 +66,7 @@ def j2_canonical(x, y, z, fE, fH, part="both", dh=1e-5):
     # E L^2 E
     ELECTRIC_PART += np.dot(
         np.conjugate(E),
+        2 * (x * dx_E + y * dy_E + z * dz_E) +
         2*x*y*ddxy_E + 2*y*z*ddzy_E + 2*z*x*ddxz_E - (y*y+z*z)*ddxx_E - (x*x+z*z)*ddyy_E - (x*x+y*y)*ddzz_E
     )
     # 2 E (LS) E
@@ -79,6 +80,7 @@ def j2_canonical(x, y, z, fE, fH, part="both", dh=1e-5):
     # H L^2 H
     MAGNETIC_PART += np.dot(
         np.conjugate(H),
+        2 * (x * dx_H + y * dy_H + z * dz_H) +
         2*x*y*ddxy_H + 2*y*z*ddzy_H + 2*z*x*ddxz_H - (y*y+z*z)*ddxx_H - (x*x+z*z)*ddyy_H - (x*x+y*y)*ddzz_H
     )
     # 2 H (LS) H
