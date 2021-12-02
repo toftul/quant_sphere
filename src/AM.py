@@ -86,13 +86,13 @@ def L_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out,
         E_(m, n, r+dr, theta, phi, mode_type, a,
            omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric)
         - E_(m, n, r-dr, theta, phi, mode_type, a,
-             omega, particle_type, eps_out, mu_ou, eps_dielectric, mu_dielectric)
+             omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric)
     ) / (2*dr)
     dE_dtheta = (
         E_(m, n, r, theta+dtheta, phi, mode_type,
-           a, omega, particle_type, eps_out, mu_out)
+           a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric)
         - E_(m, n, r, theta-dtheta, phi, mode_type,
-             a, omega, particle_type, eps_out, mu_out)
+             a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric)
     ) / (2*dtheta)
     #dE_dphi = (
     #    E_(m, n, r, theta, phi+dphi, mode_type, a, omega, particle_type, eps_out, mu_out) -
@@ -164,9 +164,9 @@ def L_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out,
 
 def J_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric,  part="both"):
     S = S_(m, n, r, theta, phi, mode_type, a, omega,
-           particle_type, eps_out, mu_out, part)
+           particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
     L = L_(m, n, r, theta, phi, mode_type, a, omega,
-           particle_type, eps_out, mu_out, part)
+           particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
 
     return L + S
 
