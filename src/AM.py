@@ -173,9 +173,9 @@ def J_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out,
 
 def J2_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
     S = S_(m, n, r, theta, phi, mode_type, a, omega,
-           particle_type, eps_out, mu_out, part)
+           particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
     L = L_(m, n, r, theta, phi, mode_type, a, omega,
-           particle_type, eps_out, mu_out, part)
+           particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
     J = L + S
 
     return np.real(np.conj(J[0])*J[0] + np.conj(J[1])*J[1] + np.conj(J[2])*J[2])

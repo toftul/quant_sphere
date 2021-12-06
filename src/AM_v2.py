@@ -98,7 +98,7 @@ def j2_canonical(x, y, z, fE, fH, part="both", dh=1e-5):
 def helicity_(x, y, z, fE, fH):
     E, H = fE(x, y, z), fH(x, y, z)
     w = np.linalg.norm(E)**2 + np.linalg.norm(H)**2
-    return np.imag(np.dot(np.conj(H), E))/w
+    return 2*np.imag(np.dot(np.conj(H), E))/w
 
 
 def j2_canonical_short(x, y, z, fE, fH, part="both", dh=1e-5):
