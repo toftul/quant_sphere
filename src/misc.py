@@ -2,6 +2,10 @@ import numpy as np
 from scipy.misc import derivative
 
 
+def delta(i, j):
+    return np.equal(i, j).astype(int)
+
+
 def cart2sph(x, y, z):
     """
         https://en.wikipedia.org/wiki/Spherical_coordinate_system#Cartesian_coordinates
