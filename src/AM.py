@@ -253,6 +253,15 @@ def Jz_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out
            particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
     return J[0] * np.cos(theta) - J[1] * np.sin(theta)
 
+def Sz_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
+    S = S_(m, n, r, theta, phi, mode_type, a, omega,
+           particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
+    return S[0] * np.cos(theta) - S[1] * np.sin(theta)
+
+def Lz_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
+    L = L_(m, n, r, theta, phi, mode_type, a, omega,
+           particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part)
+    return L[0] * np.cos(theta) - L[1] * np.sin(theta)
 
 def jz_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
     J = J_(m, n, r, theta, phi, mode_type, a, omega,
