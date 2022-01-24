@@ -420,10 +420,11 @@ def Nmn(m, n, rho, theta, phi, superscript):
         sp.spherical_jn(n, rho),
         extra_special.spherical_h1(n, rho)
     )
-    znp = np.where(superscript == 1,
-                   sp.spherical_jn(n, rho, 1),
-                   extra_special.spherical_h1p(n, rho)
-                   )
+    znp = np.where(
+        superscript == 1,
+        sp.spherical_jn(n, rho, 1),
+        extra_special.spherical_h1p(n, rho)
+    )
 
     Ymn = sp.sph_harm(m, n, phi, theta)
     dYmn = m/np.tan(theta) * Ymn
@@ -468,10 +469,11 @@ def Lmn(m, n, rho, theta, phi, superscript):
         sp.spherical_jn(n, rho),
         extra_special.spherical_h1(n, rho)
     )
-    znp = np.where(superscript == 1,
-                   sp.spherical_jn(n, rho, 1),
-                   extra_special.spherical_h1p(n, rho)
-                   )
+    znp = np.where(
+        superscript == 1,
+        sp.spherical_jn(n, rho, 1),
+        extra_special.spherical_h1p(n, rho)
+    )
 
     Ymn = sp.sph_harm(m, n, phi, theta)
     dYmn = m/np.tan(theta) * Ymn
