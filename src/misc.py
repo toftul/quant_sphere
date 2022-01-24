@@ -1,6 +1,21 @@
 import numpy as np
 from scipy.misc import derivative
 
+def ntrapz(foo, x1, x2=None, x3=None):
+    sum = 0
+    if x2 is not None:
+        if x3 is not None:
+            X1, X2, X3 = np.meshgrid(x1, x2, x3, indexing='ij')
+            F = foo(X1, X2, X3)
+            sum = np.trapz(np.trapz(np.trapz(F, X3), X2[:, :, 0]), X1[:, 0, 0])
+        else:
+            X1, X2 = np.meshgrid(x1, x2, indexing='ij')
+            F = foo(X1, X2)
+            sum = np.trapz(np.trapz(F, X2), X1[:, 0])
+    else:
+        sum = np.trapz(foo(x1), x1)
+    return sum
+
 
 def delta(i, j):
     return np.equal(i, j).astype(int)
