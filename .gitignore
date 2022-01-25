@@ -138,3 +138,4 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 sphere_AM_python_v1.ipynb
+.DS_Store
