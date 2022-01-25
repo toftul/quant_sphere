@@ -20,8 +20,8 @@ def VSH_Memn(m, n, rho, theta, phi, superscript):
     '''
     # convert input to np arrays
     rho = np.asarray(rho)
-    theta = np.asarray(theta)
-    phi = np.asarray(phi)
+    theta = np.asarray(theta, dtype=float)
+    phi = np.asarray(phi, dtype=float)
 
     # to prevent devision by zero
     theta[np.abs(theta) < 1e-15] = 1e-15
@@ -87,8 +87,8 @@ def VSH_Momn(m, n, rho, theta, phi, superscript):
     '''
     # convert input to np arrays
     rho = np.asarray(rho)
-    theta = np.asarray(theta)
-    phi = np.asarray(phi)
+    theta = np.asarray(theta, dtype=float)
+    phi = np.asarray(phi, dtype=float)
 
     # to prevent devision by zero
     theta[np.abs(theta) < 1e-15] = 1e-15  # for vectorization
@@ -151,8 +151,8 @@ def VSH_Nemn(m, n, rho, theta, phi, superscript):
     '''
     # convert input to np arrays
     rho = np.asarray(rho)
-    theta = np.asarray(theta)
-    phi = np.asarray(phi)
+    theta = np.asarray(theta, dtype=float)
+    phi = np.asarray(phi, dtype=float)
 
     # to prevent devision by zero
     theta[np.abs(theta) < 1e-15] = 1e-15
@@ -226,8 +226,8 @@ def VSH_Nomn(m, n, rho, theta, phi, superscript=1):
     '''
     # convert input to np arrays
     rho = np.asarray(rho)
-    theta = np.asarray(theta)
-    phi = np.asarray(phi)
+    theta = np.asarray(theta, dtype=float)
+    phi = np.asarray(phi, dtype=float)
 
     # to prevent devision by zero
     theta[np.abs(theta) < 1e-15] = 1e-15
@@ -362,8 +362,8 @@ def Mmn(m, n, rho, theta, phi, superscript):
     '''
     # convert input to np arrays
     rho = np.asarray(rho)
-    theta = np.asarray(theta)
-    phi = np.asarray(phi)
+    theta = np.asarray(theta, dtype=float)
+    phi = np.asarray(phi, dtype=float)
 
     # to prevent devision by zero
     theta[np.abs(theta) < 1e-15] = 1e-15
@@ -406,8 +406,8 @@ def Nmn(m, n, rho, theta, phi, superscript):
     '''
     # convert input to np arrays
     rho = np.asarray(rho)
-    theta = np.asarray(theta)
-    phi = np.asarray(phi)
+    theta = np.asarray(theta, dtype=float)
+    phi = np.asarray(phi, dtype=float)
 
     # to prevent devision by zero
     theta[np.abs(theta) < 1e-15] = 1e-15
@@ -455,8 +455,8 @@ def Lmn(m, n, rho, theta, phi, superscript):
     '''
     # convert input to np arrays
     rho = np.asarray(rho)
-    theta = np.asarray(theta)
-    phi = np.asarray(phi)
+    theta = np.asarray(theta, dtype=float)
+    phi = np.asarray(phi, dtype=float)
 
     # to prevent devision by zero
     theta[np.abs(theta) < 1e-15] = 1e-15
