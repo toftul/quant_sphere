@@ -41,6 +41,7 @@ def S_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out,
     HxH = np.cross(np.conj(H), H, axis=0)
 
 
+    # return 1/4 * np.imag(1/omega * (factor_el * eps_in_out * const.epsilon_0 * ExE + factor_mag * mu_in_out * const.mu_0 * HxH))
     return 1/(4*np.real(omega)) * np.imag(factor_el * eps_in_out * const.epsilon_0 * ExE + factor_mag * mu_in_out * const.mu_0 * HxH)
 
 
@@ -155,6 +156,10 @@ def L_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out,
         factor_el * eps_in_out * const.epsilon_0 * EnablaE
         + factor_mag * mu_in_out * const.mu_0 * HnablaH
     )
+    # linear_momentum = 1/4 * np.imag( 1/omega * (
+    #     factor_el * eps_in_out * const.epsilon_0 * EnablaE
+    #     + factor_mag * mu_in_out * const.mu_0 * HnablaH)
+    # )
     R = np.array([
         r, 0*r, 0*r
     ])
