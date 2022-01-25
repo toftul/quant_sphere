@@ -1,7 +1,13 @@
 import numpy as np
 from scipy.misc import derivative
+from scipy.integrate import simpson
+
 
 def ntrapz(foo, x1, x2=None, x3=None):
+    """
+        N-dimentional integration using simpson rule from scipy.
+        It supports scalar and vector functions
+    """
     sum = 0
     if x2 is not None:
         if x3 is not None:
@@ -14,6 +20,29 @@ def ntrapz(foo, x1, x2=None, x3=None):
             sum = np.trapz(np.trapz(F, X2), X1[:, 0])
     else:
         sum = np.trapz(foo(x1), x1)
+    return sum
+
+
+def nsimpson(foo, x1, x2=None, x3=None):
+    """
+        N-dimentional integration using simpson rule from scipy.
+        It supports only scalar functions
+
+        Idea from:
+        https://stackoverflow.com/questions/20668689/integrating-2d-samples-on-a-rectangular-grid-using-scipy
+    """
+    sum = 0
+    if x2 is not None:
+        if x3 is not None:
+            X1, X2, X3 = np.meshgrid(x1, x2, x3, indexing='ij')
+            F = foo(X1, X2, X3)
+            sum = simpson(simpson(simpson(F, X3), X2[:, :, 0]), X1[:, 0, 0])
+        else:
+            X1, X2 = np.meshgrid(x1, x2, indexing='ij')
+            F = foo(X1, X2)
+            sum = simpson(simpson(F, X2), X1[:, 0])
+    else:
+        sum = simpson(foo(x1), x1)
     return sum
 
 
