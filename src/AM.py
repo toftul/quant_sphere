@@ -3,13 +3,19 @@ from src.dispersion import *
 from src.fields import *
 # from icecream import ic
 
-def S_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
+
+def whichPart(part="both"):
     factor_el = 1
     factor_mag = 1
     if part == "electric":
         factor_mag = 0
     if part == "magnetic":
         factor_el = 0
+    return factor_el, factor_mag
+
+
+def S_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
+    factor_el, factor_mag = whichPart(part)
 
     domega = np.real(omega) * 1e-6
     eps_in_tilda = eps_in_func(omega, particle_type, eps_dielectric) + omega * (
@@ -46,12 +52,7 @@ def S_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out,
 
 
 def L_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
-    factor_el = 1
-    factor_mag = 1
-    if part == "electric":
-        factor_mag = 0
-    if part == "magnetic":
-        factor_el = 0
+    factor_el, factor_mag = whichPart(part)
 
     domega = np.real(omega) * 1e-6
     eps_in_tilda = eps_in_func(omega, particle_type, eps_dielectric) + omega * (
@@ -187,12 +188,7 @@ def J2_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out
 
 
 def W_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
-    factor_el = 1
-    factor_mag = 1
-    if part == "electric":
-        factor_mag = 0
-    if part == "magnetic":
-        factor_el = 0
+    factor_el, factor_mag = whichPart(part)
 
     domega = np.real(omega) * 1e-6
     eps_in_tilda = eps_in_func(omega, particle_type, eps_dielectric) + omega * (
@@ -378,12 +374,7 @@ def j2_kinetic_(m, n, r, theta, phi, mode_type, a, omega, particle_type, eps_out
 
 
 def S_cart_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
-    factor_el = 1
-    factor_mag = 1
-    if part == "electric":
-        factor_mag = 0
-    if part == "magnetic":
-        factor_el = 0
+    factor_el, factor_mag = whichPart(part)
 
     domega = np.real(omega) * 1e-6
     eps_in_tilda = eps_in_func(omega, particle_type) + omega * (
@@ -418,12 +409,7 @@ def S_cart_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, 
 
 
 def L_cart_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both"):
-    factor_el = 1
-    factor_mag = 1
-    if part == "electric":
-        factor_mag = 0
-    if part == "magnetic":
-        factor_el = 0
+    factor_el, factor_mag = whichPart(part)
 
     domega = np.real(omega) * 1e-6
     eps_in_tilda = eps_in_func(omega, particle_type, eps_dielectric) + omega * (
@@ -595,12 +581,7 @@ def J_kinetic_cart_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, 
 
 
 def J2_canonical_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both", epsh=1e-2):
-    factor_el = 1
-    factor_mag = 1
-    if part == "electric":
-        factor_mag = 0
-    if part == "magnetic":
-        factor_el = 0
+    factor_el, factor_mag = whichPart(part)
 
     domega = np.real(omega) * 1e-6
     eps_in_tilda = eps_in_func(omega, particle_type, eps_dielectric) + omega * (
@@ -712,12 +693,7 @@ def J2_canonical_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu
 
 
 def J2_canonical2_(m, n, x, y, z, mode_type, a, omega, particle_type, eps_out, mu_out, eps_dielectric, mu_dielectric, part="both", epsh=1e-2):
-    factor_el = 1
-    factor_mag = 1
-    if part == "electric":
-        factor_mag = 0
-    if part == "magnetic":
-        factor_el = 0
+    factor_el, factor_mag = whichPart(part)
 
     domega = np.real(omega) * 1e-6
     eps_in_tilda = eps_in_func(omega, particle_type, eps_dielectric) + omega * (
