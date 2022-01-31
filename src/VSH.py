@@ -370,7 +370,6 @@ def Mmn(m, n, rho, theta, phi, superscript):
     phi = np.asarray(phi, dtype=float)
 
     # to prevent devision by zero
-    print(rho)
     rho[np.abs(rho) < 1e-15] = 1e-15
     theta[np.abs(theta) < 1e-15] = 1e-15
 
