@@ -19,7 +19,7 @@ def VSH_Memn(m, n, rho, theta, phi, superscript):
             superscript = 1, 2, 3, 4
     '''
     # convert input to np arrays
-    rho = np.asarray(rho) + 0.0
+    rho = np.asarray(rho + 0.0)
     theta = np.asarray(theta, dtype=float)
     phi = np.asarray(phi, dtype=float)
 
@@ -87,7 +87,7 @@ def VSH_Momn(m, n, rho, theta, phi, superscript):
             superscript = 1, 2, 3, 4
     '''
     # convert input to np arrays
-    rho = np.asarray(rho) + 0.0
+    rho = np.asarray(rho + 0.0)
     theta = np.asarray(theta, dtype=float)
     phi = np.asarray(phi, dtype=float)
 
@@ -152,7 +152,7 @@ def VSH_Nemn(m, n, rho, theta, phi, superscript):
             superscript = 1, 2, 3, 4
     '''
     # convert input to np arrays
-    rho = np.asarray(rho) + 0.0
+    rho = np.asarray(rho + 0.0)
     theta = np.asarray(theta, dtype=float)
     phi = np.asarray(phi, dtype=float)
 
@@ -228,7 +228,7 @@ def VSH_Nomn(m, n, rho, theta, phi, superscript=1):
             superscript = 1, 2, 3, 4
     '''
     # convert input to np arrays
-    rho = np.asarray(rho) + 0.0
+    rho = np.asarray(rho + 0.0)
     theta = np.asarray(theta, dtype=float)
     phi = np.asarray(phi, dtype=float)
 
@@ -365,11 +365,12 @@ def Mmn(m, n, rho, theta, phi, superscript):
             superscript = 1, 2, 3, 4
     '''
     # convert input to np arrays
-    rho = np.asarray(rho) + 0.0
+    rho = np.asarray(rho + 0.0)
     theta = np.asarray(theta, dtype=float)
     phi = np.asarray(phi, dtype=float)
 
     # to prevent devision by zero
+    print(rho)
     rho[np.abs(rho) < 1e-15] = 1e-15
     theta[np.abs(theta) < 1e-15] = 1e-15
 
@@ -410,7 +411,7 @@ def Nmn(m, n, rho, theta, phi, superscript):
             superscript = 1, 2, 3, 4
     '''
     # convert input to np arrays
-    rho = np.asarray(rho) + 0.0
+    rho = np.asarray(rho + 0.0)
     theta = np.asarray(theta, dtype=float)
     phi = np.asarray(phi, dtype=float)
 
@@ -460,7 +461,7 @@ def Lmn(m, n, rho, theta, phi, superscript):
             superscript = 1, 2, 3, 4
     '''
     # convert input to np arrays
-    rho = np.asarray(rho) + 0.0
+    rho = np.asarray(rho + 0.0)
     theta = np.asarray(theta, dtype=float)
     phi = np.asarray(phi, dtype=float)
 
